@@ -1,0 +1,13 @@
+/* Kawsaypac overrides on the template */
+img[src*="kawsaypac-wordmark"] { filter: brightness(0) invert(0.96); height: 40px; width: auto; }
+footer img[src*="kawsaypac-wordmark"], .footer-logo { filter: brightness(0) invert(0.96); }
+.w-webflow-badge { display: none !important; }
+
+
+/* herb icon sprites sit cleanly in old mushroom icon slots */
+img[src*="assets/sprites/"][class*="icon"] { object-fit: contain; }
+
+/* sprite icons sit disciplined in their slots */
+.subtitle-wrapper img { width: 34px; height: 34px; object-fit: contain; }
+img.icon-feature[src*="assets/sprites/"] { width: 46px; height: 46px; object-fit: contain; }
+img[src*="assets/sprites/"]:not(.icon-feature) { max-width: 120px; max-height: 120px; object-fit: contain; }
