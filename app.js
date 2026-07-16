@@ -379,22 +379,13 @@
       });
     }
 
-    /* hero word drifts slightly on scroll (depth vs locked peak) */
-    var heroWord = document.querySelector(".hero-word");
-    if (heroWord) {
-      gsap.to(heroWord, {
-        yPercent: 30, autoAlpha: 0.3, ease: "none",
-        scrollTrigger: { trigger: ".hero-frame", start: "top top", end: "bottom top", scrub: 0.5 }
-      });
-    }
-
   };
 
   /* safety net: never leave anything invisible */
   var safetyNet = function () {
     setTimeout(function () {
       document.querySelectorAll('[style*="visibility: hidden"], [style*="opacity: 0"]').forEach(function (el) {
-        if (el.closest(".quote-rotator") || el.classList.contains("hero-video")) return;
+        if (el.closest(".quote-rotator")) return;
         el.style.opacity = "";
         el.style.visibility = "";
       });
@@ -423,20 +414,6 @@
       c.addEventListener("mouseleave", function () { c.style.transform = ""; });
     });
   };
-
-  /* ── hero video: force load + autoplay, retry on first interaction ── */
-  var initHeroVideo = function () {
-    var v = document.querySelector(".hero-video");
-    if (!v) return;
-    var kick = function () { if (v.paused) { try { v.load(); } catch (e) {} v.play().catch(function () {}); } };
-    kick();
-    setTimeout(kick, 1200);
-    ["pointerdown", "touchstart", "scroll", "keydown"].forEach(function (ev) {
-      window.addEventListener(ev, kick, { once: true, passive: true });
-    });
-  };
-  if (document.readyState !== "loading") initHeroVideo();
-  else document.addEventListener("DOMContentLoaded", initHeroVideo);
 
   /* motion + progress start at DOM ready (gsap is deferred, so it's parsed by now);
      load stays as a fallback for any readyState edge */

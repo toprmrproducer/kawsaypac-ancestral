@@ -16,12 +16,15 @@
   box-shadow: 0 30px 80px rgba(31, 58, 42, 0.18);
 }
 .hero-media { position: absolute; inset: 0; }
-.hero-base, .hero-video {
+.hero-base {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: center 40%;
+  z-index: 1; transform-origin: center;
 }
-.hero-base { z-index: 1; }
-.hero-video { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .hero-base { animation: hero-kb 30s linear infinite alternate; }
+}
+@keyframes hero-kb { from { transform: scale(1); } to { transform: scale(1.06); } }
 
 .cloud {
   position: absolute; z-index: 3; border-radius: 50%; pointer-events: none;
@@ -33,18 +36,6 @@
 @keyframes cloud-drift { to { transform: translateX(calc(100vw + 820px)); } }
 @media (prefers-reduced-motion: reduce) { .cloud { animation: none; } }
 
-/* giant brand word sitting IN the sky, summit clipping over it = text-behind-mountain */
-.hero-word {
-  position: absolute; z-index: 4; left: 50%; top: max(102px, 9.5%);
-  transform: translateX(-50%);
-  font-family: var(--f-head); font-weight: 500;
-  font-size: clamp(4rem, 10.6vw, 10.8rem);
-  letter-spacing: 0.07em; line-height: 1;
-  color: #FDFCF8;
-  text-shadow: 0 1px 2px rgba(45, 65, 80, 0.55), 0 4px 10px rgba(45, 65, 80, 0.35), 0 14px 44px rgba(45, 65, 80, 0.3);
-  pointer-events: none; user-select: none; white-space: nowrap;
-}
-@media (max-width: 720px) { .hero-word { display: none; } }
 .hero-badge {
   position: absolute; top: 106px; right: clamp(20px, 3vw, 44px); z-index: 8;
   display: flex; align-items: center; gap: 10px;
@@ -715,3 +706,140 @@
   .scroll-cue { display: none; }
   .play-btn { top: 26%; width: 64px; height: 64px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ONE CONTINUOUS ECUADOR DESCENT (Raisa 17 Jul)
+   The background is a single uninterrupted journey from the
+   Cotopaxi hero down to the jungle-floor footer. Sections keep
+   their content on white/cream cards "plugged in on top";
+   the scenery beneath never breaks.
+   ═══════════════════════════════════════════════════════════ */
+
+/* base wash: altitude light gradient across the whole document,
+   no flat white anywhere between header and footer */
+body.journey-page {
+  background:
+    linear-gradient(to bottom,
+      #F6F6F0 0%,
+      #F0F2E7 14%,
+      #ECF0E1 34%,
+      #E8EDDC 58%,
+      #E4EAD6 80%,
+      #DFE7CF 100%);
+}
+
+/* global unifying color grade: one warm-green light over the whole journey */
+body.journey-page::after {
+  content: "";
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(150, 158, 96, 0.05), rgba(56, 92, 58, 0.07));
+  mix-blend-mode: multiply;
+}
+
+/* scene plates: full-bleed, TALL feathered masks so each terrain
+   crossfades into the next with zero hard edges */
+.j-ourcollections, .j-testimonials { position: relative; overflow: visible; }
+.j-ourcollections::before, .j-retreats::before, .j-testimonials::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-size: cover; background-position: center;
+}
+.j-ourcollections::before {
+  background-image: url("assets/img/gen/bg_highlands.jpg");
+  opacity: 0.34;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 420px, black calc(100% - 380px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 420px, black calc(100% - 380px), transparent);
+}
+.j-retreats { position: relative; }
+.j-retreats::before {
+  background-image: url("assets/img/gen/bg_cloudforest_edge.jpg");
+  opacity: 0.24;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 380px, black calc(100% - 380px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 380px, black calc(100% - 380px), transparent);
+}
+.j-testimonials::before {
+  background-image: url("assets/img/gen/bg_amazon_basin.jpg");
+  opacity: 0.2;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
+}
+
+/* retune the existing per-section plates: taller feathering, stronger presence */
+.why-scene img,
+.blends-scene img,
+.terrain-band img,
+.mist-edge,
+.mist-edge img,
+.basin-band img {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
+}
+.why-scene img { opacity: 0.44; }
+.blends-scene img { opacity: 0.4; }
+.mist-edge { opacity: 0.3; }
+.basin-band { opacity: 0.36; }
+
+/* the journal scene comes alive so the descent reaches the jungle floor */
+.journal-scene { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.journal-scene img {
+  height: 100%; opacity: 0.5;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 380px, black 100%);
+  mask-image: linear-gradient(to bottom, transparent, black 380px, black 100%);
+}
+
+/* the marquee ribbon glides over the scenery instead of interrupting it */
+.journey-page .marquee-band {
+  background: rgba(243, 240, 233, 0.62);
+  backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  border-top-color: rgba(195, 187, 181, 0.4);
+  border-bottom-color: rgba(195, 187, 181, 0.4);
+}
+
+/* content stays above the plates */
+.oc-wrap, .j-testimonials .testi-panel, .j-testimonials .j-vtestis,
+.j-testimonials .j-proof, .retreat-frame { position: relative; z-index: 2; }
+
+/* ══════════ 02 · OUR COLLECTIONS (new slim section) ══════════ */
+.j-ourcollections { padding: 0 0 clamp(64px, 8vw, 120px); }
+.oc-wrap { padding-top: clamp(56px, 7vw, 96px); }
+.cc-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 26px);
+  margin-top: clamp(30px, 4vw, 48px);
+}
+.cc-card {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  text-decoration: none; text-align: center;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(195, 187, 181, 0.3);
+  border-radius: var(--r-card);
+  padding: 14px 14px 22px;
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.cc-img { display: block; width: 100%; height: clamp(170px, 16vw, 230px); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+.cc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.55s ease; }
+.cc-card h3 { font-family: var(--f-head); font-weight: 600; font-size: 1.18rem; color: var(--forest); }
+.cc-card p { font-size: 0.88rem; color: #7A766C; margin-top: 2px; }
+.cc-arrow { color: var(--gold); font-size: 1.05rem; margin-top: 10px; transition: transform 0.3s ease; }
+.cc-card:hover, .cc-card:focus-visible { transform: translateY(-7px); box-shadow: var(--shadow-lift); border-color: rgba(201, 169, 66, 0.5); }
+.cc-card:hover .cc-img img { transform: scale(1.06); }
+.cc-card:hover .cc-arrow { transform: translateX(5px); }
+.cc-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 900px) { .cc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .cc-grid { grid-template-columns: 1fr; } }
+
+/* ══════════ footer motion: leaves and orchids gently swaying ══════════ */
+.journey-page .j-footer .f-leaf-l { animation: sway-footer 9s ease-in-out infinite alternate; }
+.journey-page .j-footer .f-orchid { animation: sway-footer 11.5s ease-in-out infinite alternate; animation-delay: -4s; }
+.journey-page .j-footer .f-leaf-r { animation: sway-footer 10s ease-in-out infinite alternate; animation-delay: -7s; }
+@keyframes sway-footer { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .journey-page .j-footer .f-leaf-l,
+  .journey-page .j-footer .f-orchid,
+  .journey-page .j-footer .f-leaf-r { animation: none; }
+}
+
+/* journal legibility without the boxy white halo */
+.j-journal .h2, .j-journal .section-lede { text-shadow: 0 1px 8px rgba(250, 249, 246, 0.45); }
+.journal-scene img { opacity: 0.42; }
