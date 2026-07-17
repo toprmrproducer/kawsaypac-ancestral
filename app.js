@@ -379,7 +379,7 @@
       });
 
       /* extend the same gentle scrub to every scene backdrop (oversized so no edges show) */
-      gsap.utils.toArray(".why-scene img, .blends-scene img, .basin-band img, .mist-edge img, .journal-scene img, .footer-bg").forEach(function (img) {
+      gsap.utils.toArray(".scene-plate img, .why-scene img, .blends-scene img, .basin-band img, .mist-edge img, .journal-scene img, .footer-bg").forEach(function (img) {
         if (img.classList.contains("parallax-bg") || !img.offsetParent) return;
         gsap.fromTo(img,
           { yPercent: 4, scale: 1.08 },
