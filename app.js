@@ -282,7 +282,85 @@
     if (motionReady || prefersReduced || typeof gsap === "undefined") return;
     motionReady = true;
     if (typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
-    var heavy = window.innerWidth >= 900;
+    /* matchMedia reflects the REAL CSS viewport (robust when window.innerWidth reads 0 mid-boot) */
+    var heavy = window.matchMedia && window.matchMedia("(min-width: 900px)").matches;
+
+    /* ── hero cinematic scroll-descent (desktop + motion-on only; mobile = static hero) ── */
+    (function () {
+      var hero = document.querySelector(".j-hero");
+      var media = document.getElementById("heroMedia");
+      var overlay = document.getElementById("heroOverlay");
+      var cue = document.getElementById("scrollCue");
+      var platesWrap = document.getElementById("heroPlates");
+      var plates = Array.prototype.slice.call(document.querySelectorAll(".h-plate"));
+      var sprites = Array.prototype.slice.call(document.querySelectorAll(".descent-sprite"));
+      var altLabelEl = document.getElementById("altLabel");
+      if (!hero || !media || plates.length < 2 || typeof ScrollTrigger === "undefined" || !gsap.matchMedia) return;
+
+      var n = plates.length;
+      var seg = 1 / (n - 1);
+      var video = null, videoReady = false;
+      var clamp01 = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+
+      var setDescent = function (p) {
+        for (var i = 0; i < n; i++) {
+          plates[i].style.opacity = clamp01(1 - Math.abs(p - i * seg) / seg);
+        }
+        media.style.transform = "scale(" + (1 + 0.08 * p).toFixed(4) + ")";
+        var ov = clamp01(1 - p / 0.18);
+        if (overlay) {
+          overlay.style.opacity = ov;
+          overlay.style.transform = "translateY(" + (-40 * (1 - ov)).toFixed(1) + "px)";
+          overlay.style.pointerEvents = ov < 0.05 ? "none" : "";
+        }
+        if (cue) cue.style.opacity = ov;
+        var sp = clamp01((p - 0.5) / 0.3);
+        sprites.forEach(function (s) { s.style.opacity = sp; });
+        if (altLabelEl) {
+          altLabelEl.textContent = Math.round(5897 + (250 - 5897) * p).toLocaleString("en-US") + " m";
+        }
+        if (videoReady && video && isFinite(video.duration)) {
+          try { video.currentTime = p * video.duration; } catch (e) {}
+        }
+      };
+
+      /* optional descent video: wired ONLY if the file is actually present (no console noise, no broken media) */
+      if (window.fetch) {
+        fetch("assets/video/descent.mp4", { method: "HEAD" }).then(function (r) {
+          if (!r || !r.ok) return;
+          video = document.createElement("video");
+          video.className = "hero-video";
+          video.muted = true; video.playsInline = true; video.setAttribute("playsinline", ""); video.preload = "auto";
+          video.setAttribute("aria-hidden", "true");
+          video.src = "assets/video/descent.mp4";
+          video.addEventListener("loadedmetadata", function () { videoReady = true; media.classList.add("has-video"); });
+          media.insertBefore(video, platesWrap ? platesWrap.nextSibling : null);
+        }).catch(function () {});
+      }
+
+      /* gsap.matchMedia: creates the pin only at >=900px, tears down + resets on mobile (self-heals on resize) */
+      var mm = gsap.matchMedia();
+      mm.add("(min-width: 900px)", function () {
+        var st = ScrollTrigger.create({
+          trigger: hero,
+          start: "top top",
+          end: "+=180%",
+          pin: true,
+          scrub: 0.4,
+          onUpdate: function (self) { setDescent(self.progress); },
+          onRefresh: function (self) { setDescent(self.progress); }
+        });
+        setDescent(0);
+        return function () {
+          /* leaving desktop: reset every inline style so the static mobile hero is clean */
+          plates.forEach(function (pl) { pl.style.opacity = ""; });
+          media.style.transform = "";
+          if (overlay) { overlay.style.opacity = ""; overlay.style.transform = ""; overlay.style.pointerEvents = ""; }
+          if (cue) cue.style.opacity = "";
+          sprites.forEach(function (s) { s.style.opacity = ""; });
+        };
+      });
+    })();
 
     /* native scroll + anchor focus management (no scroll-hijack: must feel light) */
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
@@ -306,8 +384,7 @@
       .from(".hero-h1 .h1-line", { x: -56, autoAlpha: 0, duration: 0.9, stagger: 0.08, immediateRender: false }, 0.08)
       .from(".hero-lede", { x: -36, autoAlpha: 0, duration: 0.8, immediateRender: false }, 0.34)
       .from(".hero-cta .btn", { y: 22, autoAlpha: 0, duration: 0.7, stagger: 0.08, immediateRender: false }, 0.5)
-      .from(".hero-card", { x: 46, autoAlpha: 0, duration: 0.9, immediateRender: false }, 0.65)
-      .from(".hero-badge", { y: -18, autoAlpha: 0, duration: 0.7, immediateRender: false }, 0.55);
+      .from(".trust-bar", { y: 22, autoAlpha: 0, duration: 0.8, immediateRender: false }, 0.6);
 
     /* generic reveals: text enters from the left, cards fade up */
     gsap.utils.toArray(".reveal").forEach(function (el) {
