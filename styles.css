@@ -15,8 +15,8 @@
   --white:     #FFFFFF;
   --ink-light: #FDFCF8;
 
-  --f-head: "Fraunces", Georgia, serif;
-  --f-accent: "Cormorant", Georgia, serif;
+  --f-head: "Playfair Display", Georgia, serif;
+  --f-accent: "Playfair Display", Georgia, serif;
   --f-body: "Satoshi", -apple-system, "Helvetica Neue", sans-serif;
 
   --r-card: 20px;
@@ -69,8 +69,8 @@ a { color: inherit; }
   font-family: var(--f-head);
   font-weight: 500;
   font-size: clamp(2.2rem, 4vw, 3.6rem);
-  line-height: 1.06;
-  letter-spacing: -0.015em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: var(--forest);
 }
 .h2-light { color: var(--ink-light); }

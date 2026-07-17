@@ -154,9 +154,11 @@
   font-family: var(--f-head); font-weight: 500; font-style: italic;
   font-size: 1.05rem; color: var(--gold);
 }
+.why-num { z-index: 2; background: rgba(253, 252, 248, 0.92); border-radius: 999px; padding: 4px 12px; box-shadow: 0 6px 16px rgba(31, 58, 42, 0.14); }
 .why-photo {
-  display: block; width: 92px; height: 92px; margin: 0 auto 18px;
-  border-radius: 50%; overflow: hidden;
+  display: block; width: 100%; aspect-ratio: 16 / 10; height: auto;
+  max-height: 170px; min-height: 150px; margin: 0 0 18px;
+  border-radius: 16px; overflow: hidden;
   border: 3px solid var(--white);
   box-shadow: 0 10px 26px rgba(31, 58, 42, 0.16), 0 0 0 1px rgba(201, 169, 66, 0.45);
 }
@@ -178,8 +180,8 @@
 }
 .collections-card {
   position: relative; z-index: 2;
-  background: rgba(250, 249, 246, 0.92);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  background: rgba(250, 249, 246, 0.62);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: var(--r-frame);
   box-shadow: var(--shadow-card);
@@ -223,24 +225,24 @@
 .manifesto-wrap { position: relative; z-index: 1; max-width: 900px; text-align: center; }
 .manifesto {
   font-family: var(--f-head); font-weight: 500;
-  font-size: clamp(1.7rem, 3.3vw, 2.55rem);
-  line-height: 1.4; letter-spacing: -0.01em;
+  font-size: clamp(2.1rem, 4.2vw, 4.2rem);
+  line-height: 1.32; letter-spacing: -0.01em;
   color: var(--forest);
   margin: 10px 0 34px;
 }
-.manifesto .accent-i { font-size: 1.06em; }
+.manifesto .accent-i { font-size: 1.04em; }
 .chip {
   display: inline-block; vertical-align: middle;
-  width: 92px; height: 44px; border-radius: 999px; overflow: hidden;
-  margin: 0 6px; transform: translateY(-4px);
+  width: 2.1em; height: 1em; border-radius: 999px; overflow: hidden;
+  margin: 0 0.12em; transform: translateY(-0.156em);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4), 0 8px 20px rgba(31, 58, 42, 0.18);
   transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.chip img { width: 100%; height: 100%; object-fit: cover; }
-.manifesto:hover .chip:hover { width: 128px; }
+.chip img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.manifesto:hover .chip:hover { width: 2.9em; }
 .pull-quote { font-family: var(--f-accent); font-style: italic; font-size: clamp(1.15rem, 1.8vw, 1.4rem); color: var(--olive); }
 
-@media (max-width: 640px) { .chip { width: 66px; height: 32px; margin: 0 4px; } }
+@media (max-width: 640px) { .chip { margin: 0 0.1em; } }
 
 /* ══════════ 05 · FOUNDERS ══════════ */
 .j-story { position: relative; padding: clamp(60px, 8vw, 130px) 0 clamp(50px, 6vw, 90px); }
@@ -746,22 +748,22 @@ body.journey-page::after {
 }
 .j-ourcollections::before {
   background-image: url("assets/img/gen/bg_highlands.jpg");
-  opacity: 0.34;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 420px, black calc(100% - 380px), transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 420px, black calc(100% - 380px), transparent);
+  opacity: 0.48;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 280px, black calc(100% - 260px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 280px, black calc(100% - 260px), transparent);
 }
 .j-retreats { position: relative; }
 .j-retreats::before {
   background-image: url("assets/img/gen/bg_cloudforest_edge.jpg");
-  opacity: 0.24;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 380px, black calc(100% - 380px), transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 380px, black calc(100% - 380px), transparent);
+  opacity: 0.38;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 260px, black calc(100% - 260px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 260px, black calc(100% - 260px), transparent);
 }
 .j-testimonials::before {
   background-image: url("assets/img/gen/bg_amazon_basin.jpg");
-  opacity: 0.2;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
+  opacity: 0.34;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 280px, black calc(100% - 280px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 280px, black calc(100% - 280px), transparent);
 }
 
 /* retune the existing per-section plates: taller feathering, stronger presence */
@@ -771,13 +773,13 @@ body.journey-page::after {
 .mist-edge,
 .mist-edge img,
 .basin-band img {
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 400px, black calc(100% - 400px), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 280px, black calc(100% - 280px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 280px, black calc(100% - 280px), transparent);
 }
-.why-scene img { opacity: 0.44; }
-.blends-scene img { opacity: 0.4; }
-.mist-edge { opacity: 0.3; }
-.basin-band { opacity: 0.36; }
+.why-scene img { opacity: 0.58; }
+.blends-scene img { opacity: 0.54; }
+.mist-edge { opacity: 0.44; }
+.basin-band { opacity: 0.5; }
 
 /* the journal scene comes alive so the descent reaches the jungle floor */
 .journal-scene { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
@@ -789,14 +791,14 @@ body.journey-page::after {
 
 /* the marquee ribbon glides over the scenery instead of interrupting it */
 .journey-page .marquee-band {
-  background: rgba(243, 240, 233, 0.62);
+  background: rgba(243, 240, 233, 0.5);
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
   border-top-color: rgba(195, 187, 181, 0.4);
   border-bottom-color: rgba(195, 187, 181, 0.4);
 }
 
 /* content stays above the plates */
-.oc-wrap, .j-testimonials .testi-panel, .j-testimonials .j-vtestis,
+.oc-wrap, .j-testimonials .testi-panel, .j-vtestis .container,
 .j-testimonials .j-proof, .retreat-frame { position: relative; z-index: 2; }
 
 /* ══════════ 02 · OUR COLLECTIONS (new slim section) ══════════ */
@@ -842,4 +844,83 @@ body.journey-page::after {
 
 /* journal legibility without the boxy white halo */
 .j-journal .h2, .j-journal .section-lede { text-shadow: 0 1px 8px rgba(250, 249, 246, 0.45); }
-.journal-scene img { opacity: 0.42; }
+.journal-scene img { opacity: 0.56; }
+
+/* ═══════════════════════════════════════════════════════════
+   CLIENT ROUND v37 · pain point section, vt standalone,
+   premium micro-animation pass
+   ═══════════════════════════════════════════════════════════ */
+
+/* ══════════ 02 · PAIN POINT (NOKT pattern) ══════════ */
+.j-pain { position: relative; overflow: visible; padding: 0 0 clamp(56px, 7vw, 100px); }
+.pain-wrap { position: relative; z-index: 2; padding-top: clamp(48px, 6vw, 84px); }
+.pain-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.pain-visual { position: relative; min-height: clamp(360px, 34vw, 520px); }
+.pain-prod { position: absolute; object-fit: contain; }
+.pain-prod-main {
+  right: 0; bottom: 0; width: 74%; max-width: 420px; z-index: 2;
+  filter: drop-shadow(0 34px 40px rgba(31, 58, 42, 0.28));
+}
+.pain-prod-back {
+  left: 0; bottom: 7%; width: 52%; max-width: 300px; z-index: 1;
+  filter: drop-shadow(0 24px 30px rgba(31, 58, 42, 0.2));
+}
+@media (min-width: 641px) and (prefers-reduced-motion: no-preference) {
+  .pain-prod-main { animation: pain-float 6s ease-in-out infinite alternate; }
+  .pain-prod-back { animation: pain-float 7.5s ease-in-out infinite alternate; animation-delay: -3.4s; }
+}
+@keyframes pain-float { from { translate: 0 -8px; } to { translate: 0 8px; } }
+.pain-h2 {
+  font-family: var(--f-head); font-weight: 500;
+  font-size: clamp(2rem, 3.4vw, 3.1rem);
+  line-height: 1.14; letter-spacing: -0.01em;
+  color: var(--forest);
+  margin-bottom: 14px;
+}
+.pain-h2-gold { color: var(--gold); }
+.pain-h2-gold .accent-i { color: var(--gold); }
+.pain-lede { font-size: 1.14rem; color: #45433C; max-width: 540px; margin: 10px 0 28px; }
+.pain-benefits {
+  list-style: none;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 24px);
+  margin-top: clamp(44px, 5.5vw, 76px);
+}
+.pb-item {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(195, 187, 181, 0.3);
+  border-radius: var(--r-card);
+  padding: 22px 16px;
+  text-align: center;
+  font-size: 1rem; font-weight: 700; color: var(--forest);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pb-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.pb-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(201, 169, 66, 0.14);
+  box-shadow: inset 0 0 0 1.5px rgba(201, 169, 66, 0.4);
+}
+.pb-icon img { width: 42px; height: 42px; object-fit: contain; }
+@media (max-width: 860px) {
+  .pain-grid { grid-template-columns: 1fr; }
+  .pain-visual { min-height: clamp(280px, 60vw, 380px); order: 2; }
+  .pain-txt { text-align: center; order: 1; }
+  .pain-lede { margin-left: auto; margin-right: auto; }
+  .pain-benefits { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) { .pain-benefits { grid-template-columns: 1fr 1fr; gap: 12px; } .pb-item { font-size: 0.9rem; } }
+
+/* vt section standalone (moved after Our Philosophy) */
+.j-vtestis { position: relative; padding-top: clamp(40px, 5vw, 72px); }
+
+/* vt-cards: soft gold glow ring on hover */
+.vt-card:hover, .vt-card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(201, 169, 66, 0.55), 0 0 26px rgba(201, 169, 66, 0.28), var(--shadow-lift);
+}

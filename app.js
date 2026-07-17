@@ -332,6 +332,25 @@
       });
     });
 
+    /* pain section: product cutouts enter from the left with a slight rotation settle */
+    if (document.querySelector(".pain-visual")) {
+      gsap.from(".pain-prod-main", {
+        x: -90, rotation: -7, autoAlpha: 0, duration: 1.1, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: ".pain-visual", start: "top 80%", once: true }
+      });
+      gsap.from(".pain-prod-back", {
+        x: -60, rotation: 5, autoAlpha: 0, duration: 1.1, delay: 0.14, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: ".pain-visual", start: "top 80%", once: true }
+      });
+      gsap.from(".pain-benefits .pb-item", {
+        y: 26, scale: 0.86, autoAlpha: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)",
+        immediateRender: false,
+        scrollTrigger: { trigger: ".pain-benefits", start: "top 86%", once: true }
+      });
+    }
+
     /* image unmasks: clip-path sweeps open from the left */
     var unmask = function (targets, triggerEl, stagger, delay) {
       var els = gsap.utils.toArray(targets);
