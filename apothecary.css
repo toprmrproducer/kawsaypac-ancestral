@@ -533,3 +533,40 @@ html.js .cta-bg { top: -8%; height: 116%; }
 
 /* QA round: badge collides with kicker on small phones */
 @media (max-width: 560px) { .apo-hero-badge { display: none; } }
+
+/* ═══════════ Liquid-glass prep guide (18 Jul — modernize the "mundane" section) ═══════════ */
+.apo-methods { overflow: hidden; }
+.apo-methods::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(52% 56% at 16% 20%, rgba(31, 58, 42, 0.16), transparent 70%),
+    radial-gradient(48% 52% at 86% 80%, rgba(201, 169, 66, 0.20), transparent 72%),
+    radial-gradient(42% 46% at 72% 12%, rgba(110, 138, 88, 0.15), transparent 70%);
+}
+.apo-methods > .container { position: relative; z-index: 1; }
+.method-panel {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.34));
+  backdrop-filter: blur(18px) saturate(1.5); -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  box-shadow: 0 22px 52px rgba(31, 58, 42, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+.method-panel::after {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 42%; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+}
+.method-panel-anc {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.6), rgba(245, 242, 232, 0.42));
+  border-color: rgba(201, 169, 66, 0.55);
+  box-shadow: 0 0 0 1px rgba(201, 169, 66, 0.32), 0 22px 52px rgba(31, 58, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.need-band {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.30));
+  backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: 0 18px 46px rgba(31, 58, 42, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.method-vs span {
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.7);
+}

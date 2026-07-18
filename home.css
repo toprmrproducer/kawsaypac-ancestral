@@ -577,3 +577,5 @@ body.home-page { background: var(--cream); }
 
 /* butterflies removed per client (18 Jul) */
 .foot-butterfly{display:none !important}
+
+.ed-collections, .ed-blends, .ed-concern { overflow: clip; }

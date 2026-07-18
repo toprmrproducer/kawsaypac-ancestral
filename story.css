@@ -308,3 +308,6 @@
   .ch-txt p:not(.kicker) { font-size: 1.02rem; }
   .closing-cta .btn { width: 100%; }
 }
+
+/* leaf sprites anchored on the intro (18 Jul) */
+.st-intro { position: relative; overflow: clip; }

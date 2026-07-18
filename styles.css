@@ -393,3 +393,19 @@ html { overflow-x: clip; }
 .nav-pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
   backdrop-filter:blur(7px) saturate(1.4);-webkit-backdrop-filter:blur(7px) saturate(1.4);
   filter:url(#glass-distortion);pointer-events:none}
+
+/* ═══════════ Structured botanical leaf sprites (18 Jul — anchored to section corners, partially clipped) ═══════════ */
+.sec-leaf {
+  position: absolute; z-index: 1; pointer-events: none;
+  width: clamp(96px, 10vw, 172px); opacity: 0.9;
+  filter: drop-shadow(0 12px 20px rgba(16, 26, 20, 0.16));
+}
+.sl-tr { top: -20px; right: -28px; transform: rotate(9deg); }
+.sl-bl { bottom: -22px; left: -30px; transform: rotate(-11deg); }
+.sl-tl { top: -18px; left: -26px; transform: rotate(-6deg); }
+.sl-br { bottom: -20px; right: -26px; transform: rotate(7deg); }
+@media (max-width: 900px) { .sec-leaf { display: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .sec-leaf { animation: leaf-sway 9s ease-in-out infinite; transform-origin: center; }
+  @keyframes leaf-sway { 0%,100% { rotate: -2deg; } 50% { rotate: 2deg; } }
+}
