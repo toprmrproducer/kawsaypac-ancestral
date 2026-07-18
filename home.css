@@ -568,3 +568,6 @@ body.home-page { background: var(--cream); }
    ══════════════════════════════════════════════════════════ */
 ::selection { background: rgba(201, 169, 66, 0.35); color: var(--forest); }
 .btn { will-change: transform; }
+
+/* butterflies removed per client (18 Jul) */
+.foot-butterfly{display:none !important}
