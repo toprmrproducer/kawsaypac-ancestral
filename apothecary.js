@@ -205,6 +205,7 @@
      classes on this page, so app.js generics never double-fire).
      Everything is fully visible with JS disabled. */
   var initApoMotion = function () {
+    return; /* 18 Jul: body scroll-reveal "zap" removed site-wide — sections are just present */
     if (prefersReduced || typeof gsap === "undefined") return;
     if (typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
 

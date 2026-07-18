@@ -1001,21 +1001,8 @@
   onStickyScroll();
 
   /* ---------- GSAP scroll reveals (progressive enhancement) ---------- */
-  try {
-    if (window.gsap && window.ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-      document.querySelectorAll(".reveal").forEach(function (el) {
-        gsap.from(el, {
-          y: 30,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          immediateRender: false,
-          scrollTrigger: { trigger: el, start: "top 88%", once: true }
-        });
-      });
-    }
-  } catch (e) { /* content stays visible */ }
+  /* 18 Jul: body scroll-reveal "zap" removed site-wide — sections are just present.
+     Reveal tweens disabled; content is fully visible by default. */
 
   /* Safety net: content must never stay invisible. First full sweep at 3s,
      then a repeating sweep force-shows anything stuck near opacity 0
