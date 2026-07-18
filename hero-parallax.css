@@ -16,16 +16,16 @@
    the sky plate. Layers stack naturally into one composed Andean scene. */
 /* Reference scene recreated: Cotopaxi cone on the RIGHT, green valley + river
    centre leading to it, cushion-plant foreground lower-left, one sky. */
-/* Cotopaxi cone — RIGHT side, tip upper-right (per reference). */
-.px-peak{width:52%;left:76%;bottom:26%;filter:saturate(1.02);
+/* Cotopaxi cone — RIGHT side, bigger + more prominent (right side was empty). */
+.px-peak{width:62%;left:77%;bottom:23%;filter:saturate(1.03);
   -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%);
   mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%)}
-/* river valley — centre, river winds toward the volcano on the right */
-.px-valley{width:132%;left:46%;bottom:-2%}
-/* cushion-plant / frailejon foreground — lower-left prominent */
-.px-ledge{width:150%;left:44%;bottom:-4%}
+/* river valley — centre, edges overscanned OFF-screen so no hard cutout border */
+.px-valley{width:158%;left:50%;bottom:-2%}
+/* cushion-plant foreground — wide, edges off-screen (kills the right border) */
+.px-ledge{width:176%;left:50%;bottom:-4%}
 /* foliage — minimal upper-left accent only (reference is open paramo) */
-.px-foliage{width:78%;left:20%;bottom:6%}
+.px-foliage{width:80%;left:19%;bottom:6%}
 
 /* soft warm horizon scrim so text sits cleanly, matches the cream body handoff */
 #heroMedia::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -45,3 +45,13 @@
 @media (prefers-reduced-motion:reduce){
   .px-layer{transition:none}
 }
+
+/* zeroth-state brand intro (big elegant statement over the sky at scroll-top) */
+.hero-intro{position:absolute;z-index:6;left:0;right:0;top:38%;transform:translateY(-50%);
+  text-align:center;pointer-events:none;color:#fff;
+  text-shadow:0 2px 26px rgba(16,26,20,.42),0 1px 6px rgba(16,26,20,.4)}
+.hero-intro .hi-line{font-family:var(--f-accent,"Playfair Display",serif);font-style:italic;
+  font-weight:500;font-size:clamp(1.3rem,2.5vw,2.3rem);color:#F2EBD9;opacity:.94;letter-spacing:.01em}
+.hero-intro .hi-brand{font-family:var(--f-head,"Playfair Display",serif);font-weight:600;
+  font-size:clamp(3.4rem,8.4vw,7.2rem);line-height:1;letter-spacing:.015em;margin:.06em 0;color:#fff}
+@media (max-width:760px){.hero-intro{top:34%}}

@@ -11,6 +11,7 @@
   var copy = [".hero-stars", ".hero-h1", ".hero-lede", ".hero-cta", ".trust-bar"]
     .map(function (s) { return hero.querySelector(s); }).filter(Boolean);
   var cue = document.getElementById("scrollCue");
+  var intro = document.getElementById("heroIntro");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   layers.forEach(function (el) { el.__d = parseFloat(el.getAttribute("data-depth")) || 0.2; });
@@ -20,6 +21,7 @@
   function staticShow() {
     layers.forEach(function (el) { el.style.transform = el.classList.contains("px-sky") ? "" : "translateX(-50%)"; });
     copy.forEach(function (el) { el.style.opacity = "1"; el.style.visibility = "visible"; });
+    if (intro) intro.style.opacity = "0"; // no converge => show the product copy, not the intro
   }
 
   function build() {
@@ -35,6 +37,7 @@
       layers.forEach(function (el) { gsap.set(el, { yPercent: startY(el) }); });
       gsap.set(copy, { autoAlpha: 0, y: 28 });
       gsap.set(cue, { autoAlpha: 1 });
+      gsap.set(intro, { autoAlpha: 1 });
 
       var tl = gsap.timeline({
         scrollTrigger: {
@@ -44,7 +47,11 @@
           onUpdate: function (self) {
             var p = self.progress;
             gsap.set(cue, { autoAlpha: p < 0.06 ? 1 : 0 });
-            var t = Math.min(1, Math.max(0, (p - 0.78) / 0.18)); // reveal 0.78 -> 0.96
+            // brand intro: visible at the top, fades out as the scene starts converging
+            var it = Math.min(1, Math.max(0, (p - 0.02) / 0.2));
+            gsap.set(intro, { autoAlpha: 1 - it, y: -it * 24 });
+            // product copy: reveals ONLY at the very end (0.78 -> 0.96)
+            var t = Math.min(1, Math.max(0, (p - 0.78) / 0.18));
             var e = t * t * (3 - 2 * t); // smoothstep
             gsap.set(copy, { autoAlpha: e, y: (1 - e) * 26 });
           }
@@ -58,13 +65,15 @@
         gsap.set(layers, { clearProps: "transform" });
         gsap.set(copy, { clearProps: "opacity,visibility,transform" });
         gsap.set(cue, { clearProps: "opacity,visibility" });
+        gsap.set(intro, { clearProps: "opacity,visibility,transform" });
       };
     });
 
-    /* MOBILE: static composed hero, copy visible */
+    /* MOBILE: static composed hero, product copy visible, intro hidden */
     mm.add("(max-width: 899px)", function () {
       layers.forEach(function (el) { el.style.transform = el.classList.contains("px-sky") ? "" : "translateX(-50%)"; });
       copy.forEach(function (el) { el.style.opacity = "1"; el.style.visibility = "visible"; });
+      if (intro) intro.style.opacity = "0";
     });
   }
 

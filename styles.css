@@ -125,13 +125,16 @@ a { color: inherit; }
 /* ── nav ──────────────────────────────────────── */
 .site-header { position: fixed; top: 18px; left: 0; right: 0; z-index: 200; padding: 0 clamp(12px, 2vw, 24px); }
 .nav-pill {
+  position: relative; isolation: isolate;
   max-width: var(--container); margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  /* liquid glass: opaque-enough frosted tint so hero copy scrolling UNDER the
+     nav reads as behind-glass, never colliding/bleeding through */
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px) saturate(1.5); -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 22px rgba(16,26,20,.14), inset 2px 2px 1px 0 rgba(255,255,255,.6), inset -1px -1px 1px 1px rgba(255,255,255,.4);
   border-radius: 999px;
-  box-shadow: 0 10px 40px rgba(31, 58, 42, 0.08);
   padding: 10px 12px 10px 22px;
   transition: padding 0.35s ease, background 0.35s ease;
 }
@@ -385,3 +388,8 @@ html { overflow-x: clip; }
 @media (prefers-reduced-motion:reduce){
   .nav-links .nav-link,.nav-links .nav-link::before{transition:none}
 }
+
+/* liquid-glass refraction layer behind the nav content (21st.dev recipe) */
+.nav-pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  backdrop-filter:blur(7px) saturate(1.4);-webkit-backdrop-filter:blur(7px) saturate(1.4);
+  filter:url(#glass-distortion);pointer-events:none}
