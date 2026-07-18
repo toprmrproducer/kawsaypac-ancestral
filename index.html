@@ -13,8 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" crossorigin="anonymous">
   <link rel="preload" as="image" href="assets/img/gen/hero-descent-top.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=41">
-  <link rel="stylesheet" href="home.css?v=41">
+  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="home.css?v=42">
+  <link rel="stylesheet" href="hero-parallax.css?v=42">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23C9A942' stroke-width='4'%3E%3Ccircle cx='50' cy='50' r='45'/%3E%3Ccircle cx='50' cy='50' r='14'/%3E%3Ccircle cx='50' cy='36' r='14'/%3E%3Ccircle cx='50' cy='64' r='14'/%3E%3Ccircle cx='62' cy='43' r='14'/%3E%3Ccircle cx='62' cy='57' r='14'/%3E%3Ccircle cx='38' cy='43' r='14'/%3E%3Ccircle cx='38' cy='57' r='14'/%3E%3C/g%3E%3C/svg%3E">
 </head>
 <body class="home-page">
@@ -96,17 +97,14 @@
 <section class="j-hero" id="top" data-alt="5,897 m · Cotopaxi">
   <div class="hero-frame">
     <div class="hero-media" id="heroMedia">
-      <div class="hero-plates" id="heroPlates">
-        <img class="h-plate" data-p="0" src="assets/img/gen/hero-descent-top.jpg" alt="Cotopaxi rising over a lush cloud forest at dawn" fetchpriority="high">
-        <img class="h-plate" data-p="1" src="assets/img/gen/bg_highlands.jpg" alt="" aria-hidden="true" loading="lazy">
-        <img class="h-plate" data-p="2" src="assets/img/gen/bg_cloudforest_edge.jpg" alt="" aria-hidden="true" loading="lazy">
-        <img class="h-plate" data-p="3" src="assets/img/gen/bg_waterfall.jpg" alt="" aria-hidden="true" loading="lazy">
-        <img class="h-plate" data-p="4" src="assets/img/gen/bg_amazon_basin.jpg" alt="" aria-hidden="true" loading="lazy">
+      <!-- Cotopaxi parallax converge scene (real cutouts, 851-labs) -->
+      <div class="px-scene" id="pxScene">
+        <img class="px-layer px-sky"     data-depth="0.04" src="assets/parallax/sky.png"     alt="" aria-hidden="true" fetchpriority="high">
+        <img class="px-layer px-peak"    data-depth="0.16" src="assets/parallax/peak.png"    alt="Cotopaxi volcano rising over the Andean paramo at dawn">
+        <img class="px-layer px-valley"  data-depth="0.34" src="assets/parallax/valley.png"  alt="" aria-hidden="true">
+        <img class="px-layer px-ledge"   data-depth="0.54" src="assets/parallax/ledge.png"   alt="" aria-hidden="true">
+        <img class="px-layer px-foliage" data-depth="0.78" src="assets/parallax/foliage.png" alt="" aria-hidden="true">
       </div>
-      <div class="cloud cloud-a"></div>
-      <div class="cloud cloud-b"></div>
-      <img class="descent-sprite ds-orchid" src="assets/img/gen/fg_orchid.png" alt="" aria-hidden="true" loading="lazy">
-      <img class="descent-sprite ds-fern" src="assets/img/gen/fg_leaf_fern.png" alt="" aria-hidden="true" loading="lazy">
     </div>
 
     <div class="hero-overlay" id="heroOverlay">
@@ -406,6 +404,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="app.js?v=41" defer></script>
+<script src="app.js?v=42" defer></script>
+<script src="hero-parallax.js?v=42" defer></script>
 </body>
 </html>

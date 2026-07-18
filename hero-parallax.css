@@ -1,0 +1,44 @@
+/* Kawsaypac hero — Cotopaxi parallax converge scene (real 851-labs cutouts)
+   Scoped to #heroMedia so it drops into the existing j-hero without touching the
+   overlay copy, nav, or the rest of the site. */
+
+#heroMedia{position:absolute;inset:0;overflow:hidden;background:#c7d6e1}
+.px-scene{position:absolute;inset:0;z-index:0}
+.px-layer{position:absolute;left:50%;transform:translate3d(-50%,0,0);
+  will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  pointer-events:none;user-select:none}
+
+/* sky fills the frame (opaque plate behind everything) */
+.px-sky{inset:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;
+  transform:translate3d(0,0,0)}
+
+/* Cotopaxi cone — hero, upper RIGHT. Bottom faded so the cutout's straight
+   crop edge never shows as a hard line; the valley rises in front of its base. */
+.px-peak{width:50%;left:71%;bottom:26%;filter:saturate(1.02);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 74%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 74%,rgba(0,0,0,0) 100%)}
+/* glacial river valley floor — raised to sit in front of the cone base */
+.px-valley{width:130%;bottom:2%}
+/* mossy foreground ledge */
+.px-ledge{width:138%;bottom:-6%}
+/* cloud-forest foliage corner frame (closest) */
+.px-foliage{width:122%;bottom:-3%}
+
+/* soft warm horizon scrim so text sits cleanly, matches the cream body handoff */
+#heroMedia::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(18,32,46,.14) 0%,rgba(255,255,255,0) 26%,
+    rgba(20,30,20,.10) 62%,rgba(28,40,26,.34) 100%)}
+
+/* the overlay copy must stay above the scene */
+.hero-overlay{position:relative;z-index:3}
+.scroll-cue{z-index:3}
+
+@media (max-width:900px){
+  .px-peak{width:78%;left:66%;bottom:22%}
+  .px-valley{width:170%}
+  .px-ledge{width:180%}
+  .px-foliage{width:150%}
+}
+@media (prefers-reduced-motion:reduce){
+  .px-layer{transition:none}
+}
