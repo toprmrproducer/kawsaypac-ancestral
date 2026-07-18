@@ -418,6 +418,9 @@
     setTimeout(function () {
       document.querySelectorAll('[style*="visibility: hidden"], [style*="opacity: 0"]').forEach(function (el) {
         if (el.closest(".quote-rotator")) return;
+        /* the pinned Sheldon hero owns its own copy reveal (copy hidden at scroll-top,
+           revealed at the end of the converge) — never force it visible here. */
+        if (el.closest("#heroOverlay") || el.closest(".hero-intro") || el.closest(".scroll-cue")) return;
         el.style.opacity = "";
         el.style.visibility = "";
       });

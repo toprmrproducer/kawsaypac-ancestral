@@ -16,8 +16,8 @@
    the sky plate. Layers stack naturally into one composed Andean scene. */
 /* Reference scene recreated: Cotopaxi cone on the RIGHT, green valley + river
    centre leading to it, cushion-plant foreground lower-left, one sky. */
-/* Cotopaxi cone — RIGHT side, bigger + more prominent (right side was empty). */
-.px-peak{width:62%;left:77%;bottom:23%;filter:saturate(1.03);
+/* Cotopaxi cone — RIGHT side, bigger + raised higher (more sky-to-summit presence). */
+.px-peak{width:66%;left:76%;bottom:33%;filter:saturate(1.03);
   -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%);
   mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%)}
 /* river valley — centre, edges overscanned OFF-screen so no hard cutout border */
@@ -32,8 +32,11 @@
   background:linear-gradient(180deg,rgba(18,32,46,.14) 0%,rgba(255,255,255,0) 26%,
     rgba(20,30,20,.10) 62%,rgba(28,40,26,.34) 100%)}
 
-/* the overlay copy must stay above the scene */
-.hero-overlay{position:relative;z-index:3}
+/* the overlay copy must stay above the scene AND stay bottom-anchored so the
+   headline nests low over the valley and never collides with the nav.
+   (home.css sets position:absolute;bottom:0 — do NOT override to relative.) */
+.hero-overlay{position:absolute;left:0;right:0;bottom:0;z-index:3;
+  display:flex;flex-direction:column;justify-content:flex-end}
 .scroll-cue{z-index:3}
 
 @media (max-width:900px){
