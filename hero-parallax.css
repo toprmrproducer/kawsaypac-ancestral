@@ -12,22 +12,19 @@
 .px-sky{inset:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;
   transform:translate3d(0,0,0)}
 
-/* Cotopaxi cone — large, towering, centre-right. Bottom faded so the cutout's
-   crop edge never shows; the river valley rises in front of its base. */
-.px-peak{width:62%;left:60%;bottom:18%;filter:saturate(1.02);
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,0) 100%);
-  mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,0) 100%)}
-/* glacial river valley — its OWN sky is faded out by the mask so only the
-   river floor shows, sitting in front of the cone base (real layered depth). */
-.px-valley{width:116%;bottom:-2%;
-  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,#000 48%,#000 100%);
-  mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,#000 48%,#000 100%)}
-/* mossy foreground ledge — warm bg faded, only the moss band shows */
-.px-ledge{width:150%;bottom:-6%;
-  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 40%,#000 56%,#000 100%);
-  mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 40%,#000 56%,#000 100%)}
-/* cloud-forest foliage corner frame (closest) */
-.px-foliage{width:124%;bottom:-2%}
+/* Every layer below is a CLEAN CUTOUT (sky removed). The ONLY background is
+   the sky plate. Layers stack naturally into one composed Andean scene. */
+/* Cotopaxi cone — large, towering, centre-right. Bottom faded so the tight
+   crop edge blends where the valley walls rise in front of it. */
+.px-peak{width:60%;left:57%;bottom:22%;filter:saturate(1.02);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,0) 100%)}
+/* glacial river valley — real cutout, its walls frame the cone, river leads in */
+.px-valley{width:126%;bottom:-2%}
+/* mossy foreground ledge — real cutout, sits at the very bottom */
+.px-ledge{width:150%;bottom:-5%}
+/* cloud-forest foliage — real cutout, leaves frame the upper-left */
+.px-foliage{width:120%;bottom:-2%}
 
 /* soft warm horizon scrim so text sits cleanly, matches the cream body handoff */
 #heroMedia::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
