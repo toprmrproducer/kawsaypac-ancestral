@@ -14,17 +14,18 @@
 
 /* Every layer below is a CLEAN CUTOUT (sky removed). The ONLY background is
    the sky plate. Layers stack naturally into one composed Andean scene. */
-/* Cotopaxi cone — large, towering, centre-right. Bottom faded so the tight
-   crop edge blends where the valley walls rise in front of it. */
-.px-peak{width:60%;left:57%;bottom:22%;filter:saturate(1.02);
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,0) 100%);
-  mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,0) 100%)}
-/* glacial river valley — real cutout, its walls frame the cone, river leads in */
-.px-valley{width:126%;bottom:-2%}
-/* mossy foreground ledge — real cutout, sits at the very bottom */
-.px-ledge{width:150%;bottom:-5%}
-/* cloud-forest foliage — real cutout, leaves frame the upper-left */
-.px-foliage{width:120%;bottom:-2%}
+/* Reference scene recreated: Cotopaxi cone on the RIGHT, green valley + river
+   centre leading to it, cushion-plant foreground lower-left, one sky. */
+/* Cotopaxi cone — RIGHT side, tip upper-right (per reference). */
+.px-peak{width:52%;left:76%;bottom:26%;filter:saturate(1.02);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%)}
+/* river valley — centre, river winds toward the volcano on the right */
+.px-valley{width:132%;left:46%;bottom:-2%}
+/* cushion-plant / frailejon foreground — lower-left prominent */
+.px-ledge{width:150%;left:44%;bottom:-4%}
+/* foliage — minimal upper-left accent only (reference is open paramo) */
+.px-foliage{width:78%;left:20%;bottom:6%}
 
 /* soft warm horizon scrim so text sits cleanly, matches the cream body handoff */
 #heroMedia::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
