@@ -1,52 +1,73 @@
-/* Kawsaypac hero parallax — self-contained, no deps, no conflict with app.js.
-   Layers start low and rise into a composed Cotopaxi scene on load, then drift
-   at depth-scaled speeds as the hero scrolls out. Respects reduced-motion. */
+/* Kawsaypac hero — SHELDON CHALET pinned converge.
+   Desktop: the hero PINS; at scroll-top you see mostly sky + the peak tips;
+   as you scroll the layers RISE and converge into the full Cotopaxi scene;
+   the headline + copy appear ONLY at the end of the pin. Then the page releases.
+   Mobile / reduced-motion / no-GSAP: static composed scene with copy visible. */
 (function () {
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var layers = Array.prototype.slice.call(document.querySelectorAll(".px-layer"));
-  if (!layers.length) return;
   var hero = document.getElementById("top");
+  if (!hero) return;
+  var layers = Array.prototype.slice.call(hero.querySelectorAll(".px-layer"));
+  if (!layers.length) return;
+  var copy = [".hero-stars", ".hero-h1", ".hero-lede", ".hero-cta", ".trust-bar"]
+    .map(function (s) { return hero.querySelector(s); }).filter(Boolean);
+  var cue = document.getElementById("scrollCue");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function baseX(el) { return el.classList.contains("px-sky") ? "0" : "-50%"; }
+  layers.forEach(function (el) { el.__d = parseFloat(el.getAttribute("data-depth")) || 0.2; });
+  // start offset (% of own height, pushed DOWN). sky never moves.
+  function startY(el) { return el.classList.contains("px-sky") ? 0 : (56 + el.__d * 74); }
 
-  layers.forEach(function (el) {
-    el.__depth = parseFloat(el.getAttribute("data-depth")) || 0.2;
-    el.__rise = el.__depth * 72; // px it starts below rest
-  });
+  function staticShow() {
+    layers.forEach(function (el) { el.style.transform = el.classList.contains("px-sky") ? "" : "translateX(-50%)"; });
+    copy.forEach(function (el) { el.style.opacity = "1"; el.style.visibility = "visible"; });
+  }
 
-  var scrollY = 0, ticking = false;
-
-  function paint(introEase) {
-    var h = hero ? hero.offsetHeight : window.innerHeight;
-    var prog = Math.min(1, Math.max(0, scrollY / h));
-    for (var i = 0; i < layers.length; i++) {
-      var el = layers[i];
-      var rise = introEase != null ? (1 - introEase) * el.__rise : 0;
-      var par = reduce ? 0 : prog * el.__depth * 130;
-      var y = rise - par;
-      el.style.transform = "translate3d(" + baseX(el) + "," + y.toFixed(1) + "px,0)";
+  function build() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined" || !gsap.matchMedia || reduce) {
+      return staticShow();
     }
+    gsap.registerPlugin(ScrollTrigger);
+    var mm = gsap.matchMedia();
+
+    /* DESKTOP: pinned Sheldon converge */
+    mm.add("(min-width: 900px)", function () {
+      gsap.set(layers, { xPercent: function (i, el) { return el.classList.contains("px-sky") ? 0 : -50; } });
+      layers.forEach(function (el) { gsap.set(el, { yPercent: startY(el) }); });
+      gsap.set(copy, { autoAlpha: 0, y: 28 });
+      gsap.set(cue, { autoAlpha: 1 });
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: hero, start: "top top", end: "+=190%",
+          scrub: 0.7, pin: true, anticipatePin: 1,
+          // copy + cue driven directly off progress => text ONLY at the very end
+          onUpdate: function (self) {
+            var p = self.progress;
+            gsap.set(cue, { autoAlpha: p < 0.06 ? 1 : 0 });
+            var t = Math.min(1, Math.max(0, (p - 0.78) / 0.18)); // reveal 0.78 -> 0.96
+            var e = t * t * (3 - 2 * t); // smoothstep
+            gsap.set(copy, { autoAlpha: e, y: (1 - e) * 26 });
+          }
+        }
+      });
+      layers.forEach(function (el) {
+        tl.fromTo(el, { yPercent: startY(el) }, { yPercent: 0, ease: "none", duration: 1 }, 0);
+      });
+
+      return function () {
+        gsap.set(layers, { clearProps: "transform" });
+        gsap.set(copy, { clearProps: "opacity,visibility,transform" });
+        gsap.set(cue, { clearProps: "opacity,visibility" });
+      };
+    });
+
+    /* MOBILE: static composed hero, copy visible */
+    mm.add("(max-width: 899px)", function () {
+      layers.forEach(function (el) { el.style.transform = el.classList.contains("px-sky") ? "" : "translateX(-50%)"; });
+      copy.forEach(function (el) { el.style.opacity = "1"; el.style.visibility = "visible"; });
+    });
   }
 
-  function onScroll() {
-    scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-    if (!ticking) { ticking = true; requestAnimationFrame(function () { paint(null); ticking = false; }); }
-  }
-
-  // entrance rise-in (converge), then hand off to scroll parallax
-  if (reduce) {
-    paint(1);
-    window.addEventListener("scroll", onScroll, { passive: true });
-  } else {
-    var start = null, DUR = 1150;
-    (function intro(now) {
-      if (start === null) start = now;
-      var t = Math.min(1, (now - start) / DUR);
-      var e = 1 - Math.pow(1 - t, 3);
-      paint(e);
-      if (t < 1) requestAnimationFrame(intro);
-      else { window.addEventListener("scroll", onScroll, { passive: true }); paint(null); }
-    })(performance.now());
-  }
-  window.addEventListener("resize", function () { paint(null); }, { passive: true });
+  if (document.readyState !== "loading") build();
+  else document.addEventListener("DOMContentLoaded", build);
 })();

@@ -377,74 +377,10 @@
       });
     });
 
-    /* hero entrance: H1 lines stagger in from the left, 0.2s after DOM ready */
-    var heroTl = gsap.timeline({ delay: 0.2, defaults: { ease: "power3.out" } });
-    heroTl
-      .from(".hero-stars", { x: -24, autoAlpha: 0, duration: 0.7, immediateRender: false }, 0)
-      .from(".hero-h1 .h1-line", { x: -56, autoAlpha: 0, duration: 0.9, stagger: 0.08, immediateRender: false }, 0.08)
-      .from(".hero-lede", { x: -36, autoAlpha: 0, duration: 0.8, immediateRender: false }, 0.34)
-      .from(".hero-cta .btn", { y: 22, autoAlpha: 0, duration: 0.7, stagger: 0.08, immediateRender: false }, 0.5)
-      .from(".trust-bar", { y: 22, autoAlpha: 0, duration: 0.8, immediateRender: false }, 0.6);
-
-    /* generic reveals: text enters from the left, cards fade up */
-    gsap.utils.toArray(".reveal").forEach(function (el) {
-      if (el.classList.contains("story-imgs")) return; /* gets the clip-path unmask instead */
-      var vars = {
-        autoAlpha: 0, duration: 0.9, ease: "power3.out", immediateRender: false,
-        scrollTrigger: { trigger: el, start: "top 82%", once: true }
-      };
-      if (el.classList.contains("kicker")) { vars.x = -24; vars.duration = 0.7; }
-      else if (el.classList.contains("section-lede")) { vars.x = -36; vars.duration = 0.8; vars.delay = 0.08; }
-      else if (el.tagName === "P") { vars.y = 18; vars.duration = 0.7; }
-      else { vars.y = 30; }
-      gsap.from(el, vars);
-    });
-
-    /* headings slide from the left (robust: no DOM splitting, mixed children stay intact) */
-    gsap.utils.toArray(".reveal-words").forEach(function (el) {
-      gsap.from(el, {
-        x: -56, autoAlpha: 0, duration: 0.9, ease: "power3.out",
-        immediateRender: false,
-        scrollTrigger: { trigger: el, start: "top 82%", once: true }
-      });
-    });
-
-    /* pain section: product cutouts enter from the left with a slight rotation settle */
-    if (document.querySelector(".pain-visual")) {
-      gsap.from(".pain-prod-main", {
-        x: -90, rotation: -7, autoAlpha: 0, duration: 1.1, ease: "power3.out",
-        immediateRender: false,
-        scrollTrigger: { trigger: ".pain-visual", start: "top 80%", once: true }
-      });
-      gsap.from(".pain-prod-back", {
-        x: -60, rotation: 5, autoAlpha: 0, duration: 1.1, delay: 0.14, ease: "power3.out",
-        immediateRender: false,
-        scrollTrigger: { trigger: ".pain-visual", start: "top 80%", once: true }
-      });
-      gsap.from(".pain-benefits .pb-item", {
-        y: 26, scale: 0.86, autoAlpha: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)",
-        immediateRender: false,
-        scrollTrigger: { trigger: ".pain-benefits", start: "top 86%", once: true }
-      });
-    }
-
-    /* image unmasks: clip-path sweeps open from the left */
-    var unmask = function (targets, triggerEl, stagger, delay) {
-      var els = gsap.utils.toArray(targets);
-      if (!els.length) return;
-      gsap.fromTo(els,
-        { clipPath: "inset(0% 100% 0% 0%)" },
-        {
-          clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power3.out",
-          stagger: stagger || 0, delay: delay || 0, immediateRender: false,
-          scrollTrigger: { trigger: triggerEl, start: "top 82%", once: true }
-        });
-    };
-    unmask(".story-imgs .story-main img", ".story-imgs");
-    unmask(".story-polaroid", ".story-imgs", 0, 0.15);
-    unmask(".proof-img img", ".proof-card", 0, 0.1);
-    unmask(".why-grid .why-photo img", ".why-grid", 0.08);
-    unmask(".vt-grid .vt-card img", ".vt-grid", 0.08);
+    /* Hero entrance + all body scroll-reveals DISABLED (18 Jul).
+       Shreyas: the load-in "zap" / slide-in-from-the-side reading as broken
+       loading is not wanted. Sections are just present. The pinned Sheldon
+       hero (hero-parallax.js) owns the hero copy reveal itself. */
 
     /* parallax terrain (heavy: desktop only) */
     if (heavy) {
