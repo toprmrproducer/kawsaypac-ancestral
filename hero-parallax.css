@@ -20,6 +20,24 @@
 .px-peak{width:66%;left:76%;bottom:33%;filter:saturate(1.03);
   -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%);
   mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%)}
+/* SECOND mountain — distant companion peak on the LEFT (reuses the clean cone cutout,
+   scaled small + pushed into blue atmospheric haze so it reads far behind Cotopaxi). */
+.px-peak2{width:38%;left:23%;bottom:34%;
+  filter:saturate(.55) brightness(1.12) blur(1.1px);opacity:.72;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,0) 100%)}
+
+/* drifting cloud strata — soft luminous banks that nestle the peaks and add depth/life.
+   Not .px-layer, so they drift horizontally instead of rising with the converge. */
+.hero-cloud{position:absolute;z-index:2;pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.85) 0%,rgba(255,255,255,.42) 42%,rgba(255,255,255,0) 72%);
+  filter:blur(26px);will-change:transform;mix-blend-mode:screen}
+.hc-far{width:60vw;height:150px;top:30%;left:-30vw;opacity:.55;animation:cloud-drift-a 90s linear infinite}
+.hc-mid{width:46vw;height:120px;top:47%;left:-24vw;opacity:.7;animation:cloud-drift-a 70s linear infinite;animation-delay:-30s}
+.hc-low{width:70vw;height:130px;top:60%;left:-40vw;opacity:.5;animation:cloud-drift-a 110s linear infinite;animation-delay:-60s}
+@keyframes cloud-drift-a{to{transform:translateX(calc(100vw + 40vw))}}
+@media (prefers-reduced-motion:reduce){.hero-cloud{animation:none;left:auto;right:8%;opacity:.5}}
+
 /* river valley — centre, edges overscanned OFF-screen; top edge FEATHERED into
    atmospheric haze so the ridge dissolves into the mountain (no hard grey cutout seam). */
 .px-valley{width:158%;left:50%;bottom:-2%;

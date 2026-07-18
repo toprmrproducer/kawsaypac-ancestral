@@ -579,3 +579,39 @@ body.home-page { background: var(--cream); }
 .foot-butterfly{display:none !important}
 
 .ed-collections, .ed-blends, .ed-concern { overflow: clip; }
+
+/* ═══════════ Retreats film (autoplay-on-scroll YouTube) ═══════════ */
+.retreat-film { max-width: 760px; margin: clamp(22px,3vw,34px) auto 0; }
+.rf-frame {
+  position: relative; aspect-ratio: 16/9; border-radius: var(--r-frame);
+  overflow: hidden; box-shadow: 0 26px 64px rgba(16,26,20,.34);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.rf-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .6s ease; z-index: 1; }
+.rf-embed { position: absolute; inset: 0; z-index: 2; }
+.rf-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+.retreat-film.rf-playing .rf-poster { opacity: 0; }
+.retreat-film .play-btn { position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.rf-caption { display: block; margin-top: 14px; color: rgba(253,252,248,.9); font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; }
+
+/* ═══════════ Image testimonials (written reviews, bottom) ═══════════ */
+.ed-reviews { background: var(--cream-2, #F4F1E8); overflow: clip; }
+.review-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px,1.6vw,22px);
+  margin-top: clamp(30px,4vw,48px); text-align: left;
+}
+.review-card {
+  background: linear-gradient(155deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201,169,66,.28); border-radius: 20px;
+  padding: clamp(20px,1.8vw,28px); box-shadow: 0 14px 38px rgba(31,58,42,.10);
+  display: flex; flex-direction: column; gap: 14px; margin: 0;
+}
+.review-stars { color: var(--gold); letter-spacing: 3px; font-size: 1rem; }
+.review-card blockquote { margin: 0; font-size: 1.02rem; line-height: 1.55; color: #33322C; font-style: italic; }
+.review-card figcaption { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+.review-card figcaption img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex: none; }
+.review-card figcaption strong { display: block; font-family: var(--f-head); color: var(--forest); font-size: .98rem; }
+.review-card figcaption em { font-style: normal; font-size: .8rem; color: #7A7768; letter-spacing: .02em; }
+@media (max-width: 1000px) { .review-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .review-grid { grid-template-columns: 1fr; } .retreat-film .play-btn { transform: translate(-50%,-50%) scale(.85); } }

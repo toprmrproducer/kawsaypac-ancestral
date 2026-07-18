@@ -13,9 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/gen/hero-descent-top.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=56">
-  <link rel="stylesheet" href="home.css?v=56">
-  <link rel="stylesheet" href="hero-parallax.css?v=56">
+  <link rel="stylesheet" href="styles.css?v=57">
+  <link rel="stylesheet" href="home.css?v=57">
+  <link rel="stylesheet" href="hero-parallax.css?v=57">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23C9A942' stroke-width='4'%3E%3Ccircle cx='50' cy='50' r='45'/%3E%3Ccircle cx='50' cy='50' r='14'/%3E%3Ccircle cx='50' cy='36' r='14'/%3E%3Ccircle cx='50' cy='64' r='14'/%3E%3Ccircle cx='62' cy='43' r='14'/%3E%3Ccircle cx='62' cy='57' r='14'/%3E%3Ccircle cx='38' cy='43' r='14'/%3E%3Ccircle cx='38' cy='57' r='14'/%3E%3C/g%3E%3C/svg%3E">
 </head>
 <body class="home-page">
@@ -100,7 +100,11 @@
       <!-- Cotopaxi parallax converge scene (real cutouts, 851-labs) -->
       <div class="px-scene" id="pxScene">
         <img class="px-layer px-sky"     data-depth="0.04" src="assets/parallax/sky.png"     alt="" aria-hidden="true" fetchpriority="high">
-        <img class="px-layer px-peak"    data-depth="0.16" src="assets/parallax/peak.png"    alt="Cotopaxi volcano rising over the Andean paramo at dawn">
+        <div class="hero-cloud hc-far" aria-hidden="true"></div>
+        <img class="px-layer px-peak2"   data-depth="0.09" src="assets/parallax/peak.png"    alt="" aria-hidden="true">
+        <img class="px-layer px-peak"    data-depth="0.13" src="assets/parallax/peak.png"    alt="Cotopaxi volcano rising over the Andean paramo at dawn">
+        <div class="hero-cloud hc-mid" aria-hidden="true"></div>
+        <div class="hero-cloud hc-low" aria-hidden="true"></div>
         <img class="px-layer px-valley"  data-depth="0.34" src="assets/parallax/valley.png"  alt="" aria-hidden="true">
         <img class="px-layer px-ledge"   data-depth="0.54" src="assets/parallax/ledge.png"   alt="" aria-hidden="true">
       </div>
@@ -174,6 +178,39 @@
         <h3>Full Body Detox</h3><p>Gentle Reset</p>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════ S3 · VIDEO TESTIMONIALS — Real people, real results (NOKT: high on the page) ══════════════════ -->
+<section class="ed ed-stories" id="stories">
+  <img class="sec-leaf sl-tr" src="assets/img/gen/fg_leaf_fern.png" alt="" aria-hidden="true">
+  <div class="container center">
+    <p class="kicker reveal">Hear it from our buyers</p>
+    <h2 class="ed-h2 reveal-words">Real people. <em class="accent-i">Real results.</em></h2>
+    <p class="ed-lede reveal">Customers across the Americas on what these plants changed for them.</p>
+    <div class="vt-grid">
+      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
+        <img src="assets/img/testimonials/testimonial-05.webp" alt="Customer harvesting herbs in the field" loading="lazy">
+        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vt-name">Joint comfort · Cat's Claw</span>
+      </button>
+      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
+        <img src="assets/img/testimonials/testimonial-06.webp" alt="Customer outdoors after a workout" loading="lazy">
+        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vt-name">Gym energy · Zapped In</span>
+      </button>
+      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
+        <img src="assets/img/raisa-masiposa.jpg" alt="Customer in the Ecuadorian landscape" loading="lazy">
+        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vt-name">Cycle balance · Sacred Sacral</span>
+      </button>
+      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
+        <img src="assets/img/testimonials/testimonial-08.webp" alt="Customer with family in nature" loading="lazy">
+        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vt-name">Daily digestion · Bowel Balance</span>
+      </button>
+    </div>
+    <p class="vt-note reveal">Video stories are being filmed with real customers now. Posters shown meanwhile.</p>
   </div>
 </section>
 
@@ -298,42 +335,49 @@
     <p class="kicker kicker-gold reveal">Retreats · Ecuador</p>
     <h2 class="h2 h2-light reveal-words">Step away. Reconnect. Return renewed.</h2>
     <p class="retreat-lede reveal">Immersive plant-wisdom retreats in the Andes and the Amazon, guided by the people who live it.</p>
-    <button class="play-btn" id="playRetreat" aria-label="Play the retreats film">
-      <svg viewBox="0 0 24 24" fill="#FDFCF8" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-    </button>
-    <button class="btn btn-glass btn-lg reveal" id="watchRetreat" type="button">Watch the Film <span class="arrow" aria-hidden="true">→</span></button>
+    <!-- Retreat film: autoplays (muted) when scrolled into view. Set data-yt to the real YouTube ID. -->
+    <div class="retreat-film reveal" id="retreatFilm" data-yt="MHHxiENWMho">
+      <div class="rf-frame">
+        <img class="rf-poster" src="assets/img/gen/bg_waterfall.jpg" alt="Kawsaypac retreats film" loading="lazy">
+        <button class="play-btn" id="playRetreat" aria-label="Play the retreats film">
+          <svg viewBox="0 0 24 24" fill="#FDFCF8" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="rf-embed" aria-hidden="true"></div>
+      </div>
+      <span class="rf-caption">Watch the film — Andes &amp; Amazon retreats</span>
+    </div>
   </div>
 </section>
 
-<!-- ══════════════════ S6 · COMMUNITY STORIES (cream, video cards only) ══════════════════ -->
-<section class="ed ed-stories" id="stories">
+<!-- ══════════════════ S8 · IMAGE TESTIMONIALS — written reviews (bottom, NOKT order) ══════════════════ -->
+<section class="ed ed-reviews" id="reviews">
+  <img class="sec-leaf sl-bl" src="assets/img/gen/fg_orchid.png" alt="" aria-hidden="true">
   <div class="container center">
-    <p class="kicker reveal">Hear it from our buyers</p>
-    <h2 class="ed-h2 reveal-words">Real people. <em class="accent-i">Real results.</em></h2>
-    <p class="ed-lede reveal">Customers across the Americas on what these plants changed for them.</p>
-    <div class="vt-grid">
-      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
-        <img src="assets/img/testimonials/testimonial-05.webp" alt="Customer harvesting herbs in the field" loading="lazy">
-        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="vt-name">Joint comfort · Cat's Claw</span>
-      </button>
-      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
-        <img src="assets/img/testimonials/testimonial-06.webp" alt="Customer outdoors after a workout" loading="lazy">
-        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="vt-name">Gym energy · Zapped In</span>
-      </button>
-      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
-        <img src="assets/img/raisa-masiposa.jpg" alt="Customer in the Ecuadorian landscape" loading="lazy">
-        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="vt-name">Cycle balance · Sacred Sacral</span>
-      </button>
-      <button class="vt-card reveal" type="button" aria-label="Play video testimonial">
-        <img src="assets/img/testimonials/testimonial-08.webp" alt="Customer with family in nature" loading="lazy">
-        <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="vt-name">Daily digestion · Bowel Balance</span>
-      </button>
+    <p class="kicker reveal">In their words</p>
+    <h2 class="ed-h2 reveal-words">Loved across the <em class="accent-i">Americas.</em></h2>
+    <p class="ed-lede reveal">Written reviews from people who made these plants part of their daily ritual.</p>
+    <div class="review-grid">
+      <figure class="review-card reveal">
+        <div class="review-stars" aria-label="Five stars">★★★★★</div>
+        <blockquote>My joints feel years younger. The Cat's Claw decoction became my morning ritual and I have not looked back.</blockquote>
+        <figcaption><img src="assets/img/testimonials/testimonial-05.webp" alt="" loading="lazy"><span><strong>Marisol A.</strong><em>Quito · Cat's Claw</em></span></figcaption>
+      </figure>
+      <figure class="review-card reviewed reveal">
+        <div class="review-stars" aria-label="Five stars">★★★★★</div>
+        <blockquote>Clean, steady energy for my training with zero crash. Zapped In replaced three supplements I used to take.</blockquote>
+        <figcaption><img src="assets/img/testimonials/testimonial-06.webp" alt="" loading="lazy"><span><strong>Daniel R.</strong><em>Austin · Zapped In</em></span></figcaption>
+      </figure>
+      <figure class="review-card reveal">
+        <div class="review-stars" aria-label="Five stars">★★★★★</div>
+        <blockquote>My cycle finally feels balanced and predictable. Sacred Sacral is the first thing that actually worked for me.</blockquote>
+        <figcaption><img src="assets/img/raisa-masiposa.jpg" alt="" loading="lazy"><span><strong>Camila V.</strong><em>Medellín · Sacred Sacral</em></span></figcaption>
+      </figure>
+      <figure class="review-card reveal">
+        <div class="review-stars" aria-label="Five stars">★★★★★</div>
+        <blockquote>Gentle, real, and it works. My digestion is calm for the first time in years and the whole family drinks it now.</blockquote>
+        <figcaption><img src="assets/img/testimonials/testimonial-08.webp" alt="" loading="lazy"><span><strong>Priya N.</strong><em>Toronto · Bowel Balance</em></span></figcaption>
+      </figure>
     </div>
-    <p class="vt-note reveal">Video stories are being filmed with real customers now. Posters shown meanwhile.</p>
   </div>
 </section>
 
@@ -412,7 +456,9 @@
   <svg style="display:none" aria-hidden="true"><filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.001 0.006" numOctaves="1" seed="17" result="t"/><feGaussianBlur in="t" stdDeviation="3" result="s"/><feDisplacementMap in="SourceGraphic" in2="s" scale="55" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="app.js?v=56" defer></script>
-<script src="hero-parallax.js?v=56" defer></script>
+<script src="app.js?v=57" defer></script>
+<script src="hero-parallax.js?v=57" defer></script>
+<script src="retreat-film.js?v=57" defer></script>
+<script src="drag-sprites.js?v=57" defer></script>
 </body>
 </html>

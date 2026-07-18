@@ -570,3 +570,23 @@ html.js .cta-bg { top: -8%; height: 116%; }
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.7);
 }
+
+/* ═══════════ Prep guide — editorial photo headers (de-generic, premium) 18 Jul ═══════════ */
+.method-panel { --mp: clamp(24px, 3vw, 40px); padding: var(--mp); overflow: hidden; }
+.method-photo {
+  margin: calc(-1 * var(--mp)) calc(-1 * var(--mp)) 24px;
+  position: relative; height: clamp(158px, 16vw, 214px); overflow: hidden;
+}
+.method-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.2,.7,.3,1); }
+.method-panel:hover .method-photo img { transform: scale(1.06); }
+.method-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31,58,42,.02) 40%, rgba(31,58,42,.42)); }
+.method-photo-tag {
+  position: absolute; left: 18px; bottom: 14px; z-index: 2; color: #FDFCF8;
+  font-family: var(--f-head); font-style: italic; letter-spacing: .06em; font-size: 1.05rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+}
+.method-panel-anc .method-photo-tag { color: var(--gold-soft, #E7D8A6); }
+/* warmer editorial material: gold hairline + soft inner warmth over the round-3 glass */
+.method-panel { border-color: rgba(201,169,66,.3); box-shadow: 0 22px 54px rgba(31,58,42,.14), inset 0 1px 0 rgba(255,255,255,.75); }
+.method-name { font-size: clamp(1.5rem, 2vw, 1.9rem); }
+.method-vs span { font-family: var(--f-head); font-style: italic; }
