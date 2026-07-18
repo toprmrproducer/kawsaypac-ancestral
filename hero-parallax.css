@@ -20,12 +20,15 @@
 .px-peak{width:66%;left:76%;bottom:33%;filter:saturate(1.03);
   -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%);
   mask-image:linear-gradient(180deg,#000 0%,#000 80%,rgba(0,0,0,0) 100%)}
-/* river valley — centre, edges overscanned OFF-screen so no hard cutout border */
-.px-valley{width:158%;left:50%;bottom:-2%}
-/* cushion-plant foreground — wide, edges off-screen (kills the right border) */
-.px-ledge{width:176%;left:50%;bottom:-4%}
-/* foliage — minimal upper-left accent only (reference is open paramo) */
-.px-foliage{width:80%;left:19%;bottom:6%}
+/* river valley — centre, edges overscanned OFF-screen; top edge FEATHERED into
+   atmospheric haze so the ridge dissolves into the mountain (no hard grey cutout seam). */
+.px-valley{width:158%;left:50%;bottom:-2%;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.25) 6%,#000 18%,#000 100%);
+  mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.25) 6%,#000 18%,#000 100%)}
+/* cushion-plant foreground — wide, edges off-screen; top edge feathered (kills the ridge seam). */
+.px-ledge{width:176%;left:50%;bottom:-4%;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.3) 5%,#000 16%,#000 100%);
+  mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.3) 5%,#000 16%,#000 100%)}
 
 /* soft warm horizon scrim so text sits cleanly, matches the cream body handoff */
 #heroMedia::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -43,7 +46,6 @@
   .px-peak{width:78%;left:66%;bottom:22%}
   .px-valley{width:170%}
   .px-ledge{width:180%}
-  .px-foliage{width:150%}
 }
 @media (prefers-reduced-motion:reduce){
   .px-layer{transition:none}
