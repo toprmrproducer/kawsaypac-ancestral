@@ -202,22 +202,30 @@
     }
   })();
 
-  /* ── retreats video lightbox (facade) ── */
+  /* ── retreats video + honest customer-story previews ── */
   (function () {
     var btn = document.getElementById("playRetreat");
     var lb = document.getElementById("lightbox");
     var frame = document.getElementById("lbFrame");
     var close = document.getElementById("lbClose");
-    if (!btn || !lb) return;
+    var storyCards = document.querySelectorAll(".vt-card[data-product]");
+    if (!lb || !frame || !close) return;
     var lastFocus = null;
-    var open = function () {
+    var show = function (content) {
       lastFocus = document.activeElement;
-      frame.innerHTML =
-        '<iframe src="https://www.youtube-nocookie.com/embed/MHHxiENWMho?autoplay=1&rel=0" title="Kawsaypac retreats video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      frame.innerHTML = content;
       lb.classList.add("open");
       lb.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
       close.focus();
+    };
+    var openRetreat = function () {
+      show('<iframe src="https://www.youtube-nocookie.com/embed/MHHxiENWMho?autoplay=1&rel=0" title="Kawsaypac retreats video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>');
+    };
+    var openStory = function (card) {
+      var title = card.getAttribute("data-story") || "Customer ritual";
+      var product = card.getAttribute("data-product") || "https://theelectriceats.com/collections/all";
+      show('<div class="story-preview"><div class="story-preview-inner"><p class="story-preview-kicker">Community story preview</p><h3>' + title + '</h3><p>The full customer film is in production. In the meantime, meet the botanical ritual behind this story.</p><a class="btn btn-gold" href="' + product + '">Explore the ritual</a></div></div>');
     };
     var shut = function () {
       lb.classList.remove("open");
@@ -226,9 +234,12 @@
       document.body.style.overflow = "";
       if (lastFocus) lastFocus.focus();
     };
-    btn.addEventListener("click", open);
+    if (btn) btn.addEventListener("click", openRetreat);
     var watch = document.getElementById("watchRetreat");
-    if (watch) watch.addEventListener("click", open);
+    if (watch) watch.addEventListener("click", openRetreat);
+    storyCards.forEach(function (card) {
+      card.addEventListener("click", function () { openStory(card); });
+    });
     close.addEventListener("click", shut);
     lb.addEventListener("click", function (e) { if (e.target === lb) shut(); });
     document.addEventListener("keydown", function (e) {
@@ -377,10 +388,22 @@
       });
     });
 
-    /* Hero entrance + all body scroll-reveals DISABLED (18 Jul).
-       Shreyas: the load-in "zap" / slide-in-from-the-side reading as broken
-       loading is not wanted. Sections are just present. The pinned Sheldon
-       hero (hero-parallax.js) owns the hero copy reveal itself. */
+    /* Calm body reveals. Markup is fully visible without JS; GSAP only adds
+       a short, once-only lift when an editorial section enters the viewport. */
+    if (typeof ScrollTrigger !== "undefined") {
+      gsap.utils.toArray("#main > section:not(.j-hero)").forEach(function (section) {
+        var items = section.querySelectorAll(".reveal, .reveal-words");
+        if (!items.length) return;
+        gsap.fromTo(items,
+          { autoAlpha: 0, y: 18 },
+          {
+            autoAlpha: 1, y: 0, duration: 0.72, stagger: 0.065,
+            ease: "power2.out", clearProps: "opacity,visibility,transform",
+            scrollTrigger: { trigger: section, start: "top 82%", once: true }
+          }
+        );
+      });
+    }
 
     /* parallax terrain (heavy: desktop only) */
     if (heavy) {

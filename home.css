@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   KAWSAYPAC · homepage · v40
+   KAWSAYPAC · homepage · v58
    Raisa's final mock: "The hero is the journey. The homepage is
    the destination." Cinematic scroll-descent hero, then CLEAN
    CREAM/WHITE editorial body (dark ink on cream, generous
@@ -10,7 +10,7 @@
 body.home-page { background: var(--cream); }
 
 /* shared editorial type on cream */
-.ed { position: relative; padding: clamp(64px, 8vw, 120px) 0; }
+.ed { position: relative; padding: clamp(64px, 8vw, 120px) 0; scroll-margin-top: clamp(96px, 10vw, 132px); }
 .ed-h2 {
   font-family: var(--f-head); font-weight: 500;
   font-size: clamp(2.1rem, 4vw, 3.4rem);
@@ -169,7 +169,7 @@ body.home-page { background: var(--cream); }
 }
 .collection-item {
   text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 4px;
-  padding: 8px 6px 10px; border-radius: 18px;
+  min-height: 44px; padding: 8px 6px 10px; border-radius: 18px;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .ci-img {
@@ -321,11 +321,11 @@ body.home-page { background: var(--cream); }
 }
 .concern-chip {
   text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 10px;
-  width: clamp(96px, 9vw, 118px);
+  width: clamp(116px, 10vw, 138px); min-height: 44px;
   transition: transform 0.3s ease;
 }
 .cc-img {
-  width: clamp(72px, 6.6vw, 92px); aspect-ratio: 1 / 1; height: auto;
+  width: clamp(92px, 7.8vw, 116px); aspect-ratio: 1 / 1; height: auto;
   border-radius: 50%; overflow: hidden; display: block;
   border: 3px solid var(--white);
   box-shadow: 0 12px 26px rgba(31, 58, 42, 0.16);
@@ -424,11 +424,31 @@ body.home-page { background: var(--cream); }
 @media (max-width: 900px) { .vt-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ══════════════════════════════════════════════════════════
-   S7 + S8 · NEWSLETTER + FOOTER (one rainforest scene, unboxed)
+   S7 · NEWSLETTER (quiet editorial capture)
+   ══════════════════════════════════════════════════════════ */
+.ed-newsletter {
+  background: #F7F4EC;
+  border-top: 1px solid rgba(31, 58, 42, 0.1);
+  border-bottom: 1px solid rgba(31, 58, 42, 0.1);
+}
+.ed-newsletter .container { max-width: 760px; }
+.ed-newsletter .nl-title {
+  color: var(--forest); text-shadow: none;
+  font-size: clamp(2.35rem, 4.6vw, 4rem);
+}
+.ed-newsletter .nl-sub { color: #55534B; text-shadow: none; }
+.ed-newsletter .nl-fine { color: #777268; }
+.ed-newsletter .journal-ok { color: var(--forest); text-shadow: none; }
+.ed-newsletter .journal-form input {
+  background: #FFFDF8; border-color: rgba(31, 58, 42, 0.24);
+}
+
+/* ══════════════════════════════════════════════════════════
+   S8 · FOOTER (one rainforest scene, unboxed)
    ══════════════════════════════════════════════════════════ */
 .site-footer {
   position: relative; overflow: hidden;
-  padding: clamp(70px, 9vw, 130px) 0 clamp(36px, 4vw, 56px);
+  padding: clamp(44px, 6vw, 82px) 0 clamp(36px, 4vw, 56px);
   color: rgba(253, 252, 248, 0.92);
 }
 .footer-scene-bg { position: absolute; inset: 0; z-index: 0; }
@@ -485,7 +505,6 @@ body.home-page { background: var(--cream); }
 @media (max-width: 760px) { .foot-sprite, .foot-butterfly { display: none; } }
 
 /* newsletter */
-.newsletter { max-width: 680px; margin: 0 auto clamp(40px, 5vw, 64px); }
 .nl-title {
   font-family: var(--f-head); font-weight: 500;
   font-size: clamp(2rem, 3.6vw, 3rem); color: var(--ink-light);
@@ -559,6 +578,16 @@ body.home-page { background: var(--cream); }
 .lightbox.open { display: flex; }
 .lb-frame { width: min(1060px, 100%); aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #000; }
 .lb-frame iframe { width: 100%; height: 100%; border: 0; }
+.story-preview {
+  width: 100%; height: 100%; display: grid; place-items: center; text-align: center;
+  padding: clamp(28px, 6vw, 72px); color: var(--ink-light);
+  background: radial-gradient(circle at 50% 22%, rgba(201,169,66,.24), transparent 34%), #173426;
+}
+.story-preview-inner { max-width: 600px; }
+.story-preview-kicker { margin: 0 0 12px; color: var(--gold-soft); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; font-size: .78rem; }
+.story-preview h3 { margin: 0 0 16px; font-family: var(--f-head); font-weight: 500; font-size: clamp(2rem, 5vw, 4.2rem); line-height: 1.06; }
+.story-preview p { margin: 0 auto 24px; max-width: 500px; color: rgba(253,252,248,.8); font-size: 1rem; line-height: 1.65; }
+.story-preview .btn { display: inline-flex; }
 .lb-close {
   position: absolute; top: 22px; right: 26px;
   width: 52px; height: 52px; border-radius: 50%;
